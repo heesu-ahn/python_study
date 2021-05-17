@@ -44,12 +44,40 @@ def activate_lotto():
         numarray = insetlotto(i)
 
 
+# 생성된 로또 번호 순차 정렬 Function
+def sort_by_number():
+    small_index = 0
+    switching_value = 0
+    inum_index = 0
+
+    for i in range(0,6):
+        inum_index = i
+        for j in range(i,6):
+            if((j+1) < 6):
+                if(lotto[i] > lotto[j+1]):
+                    small_index = j+1
+                    switching_value = lotto[inum_index]
+                    lotto[inum_index] = lotto[small_index]
+                    lotto[small_index] = switching_value
+
+                else :
+                    small_index = i
+                    switching_value = lotto[inum_index]
+                    lotto[inum_index] = lotto[small_index]
+                    lotto[small_index] = switching_value
+
+
+
+
 # 로또번호 다시 생성할 지 묻는 Function
 def confirm_choice ():
     confirm = input('다시 번호를 뽑으시겠습니까?\nYES : [ Y ] or NO : [ N ]\n')
     if (confirm in ('Y','N')):
         if(confirm == 'Y'):
             activate_lotto()
+            print('정렬 전 : ',lotto)
+            sort_by_number()
+            print('정렬 후 : ',lotto)
             print('----------------------------------------------')
             print('로또 실행 결과 : ', lotto)
             print('----------------------------------------------')
@@ -64,6 +92,9 @@ def confirm_choice ():
 # 최초 로또 번호를 생성
 print('----------------------------------------------')
 activate_lotto()
+print('정렬 전 : ',lotto)
+sort_by_number()
+print('정렬 후 : ',lotto)
 print('로또 실행 결과 : ', lotto)
 print('----------------------------------------------')
 # 로또 번호를 다시 생성할 지 묻는다
